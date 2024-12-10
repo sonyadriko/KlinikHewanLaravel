@@ -1,6 +1,6 @@
-# Klinik Hewan Aplikasi 🐾🐶🐱
+# Aplikasi Klinik Hewan 🐾🐶🐱
 
-Selamat datang di **Klinik Hewan Aplikasi**! 🏥✨
+Selamat datang di **Aplikasi Klinik Hewan**! 🏥✨
 
 Aplikasi ini dirancang untuk mempermudah proses pengelolaan klinik hewan, termasuk pendaftaran pasien, penjadwalan, dan riwayat medis. Dengan antarmuka yang user-friendly dan fitur yang terintegrasi, aplikasi ini dapat membantu klinik dalam memberikan layanan terbaik kepada hewan peliharaan kesayangan Anda. 💙
 
