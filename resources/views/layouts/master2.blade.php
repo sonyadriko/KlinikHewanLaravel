@@ -69,6 +69,8 @@
     <!-- Memuat DataTables CSS -->
     <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
 
+
+
     @yield('scripts')
 </body>
 

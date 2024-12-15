@@ -19,12 +19,12 @@ class StoreArtikelRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'judul' => 'required|string|max:255',
-            'isi' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'isi' => 'required|string',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Jika Anda mengharuskan gambar
         ];
     }
 
@@ -32,6 +32,7 @@ class StoreArtikelRequest extends FormRequest
     {
         return [
             'judul.required' => 'Judul artikel wajib diisi.',
+            'penulis.required' => 'Penulis artikel harus diisi.',
             'isi.required' => 'Isi artikel wajib diisi.',
             'gambar.required' => 'Gambar artikel wajib diunggah.',
             'gambar.image' => 'File harus berupa gambar.',

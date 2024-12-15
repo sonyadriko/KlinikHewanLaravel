@@ -20,11 +20,12 @@ class User extends Authenticatable
     protected $primaryKey = 'id_users';
 
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
+        'role',
         'alamat', // Tambahkan kolom alamat
-        'notelepon', // Tambahkan kolom no telepon
+        'notelp', // Tambahkan kolom no telepon
     ];
 
     /**
@@ -46,4 +47,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function hewan()
+    {
+        return $this->hasMany(Hewan::class, 'users_id');
+    }
 }

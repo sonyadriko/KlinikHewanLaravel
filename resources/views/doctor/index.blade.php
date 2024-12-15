@@ -10,7 +10,7 @@
                     <div class="page-title-content">
                         <p>
                             Selamat Datang,
-                            {{-- <strong>{{ Auth::user()->nama }}</strong> --}}
+                            <strong>{{ Auth::user()->role }}</strong>
                         </p>
                     </div>
                 </div>

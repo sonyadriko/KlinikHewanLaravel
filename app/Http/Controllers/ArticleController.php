@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreArtikelRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -15,10 +16,14 @@ class ArticleController extends Controller
     public function index(){
         $articles = Article::paginate(10); // Paginate 10 items per page
         Log::info('Session Debug', [
-            'user_id' => session()->get('user_id'), // Cek jika id ada di dalam sesi
-            'auth_user' => Auth()->user() ? Auth()->user()->id_users : null, // Pastikan pengguna terautentikasi dan ambil ID jika ada
-            'session_id' => session()->getId(), // ID sesi
+            'user_id' => auth()->check() ? auth()->id() : null,
+            'auth_user' => auth()->check() ? auth()->user()->id : null,
+            'role' => auth()->check() ? auth()->user()->role : 'Role not available',
+            'guard' => Auth::getDefaultDriver(),
+            'session_id' => session()->getId(),
         ]);
+
+
 
         return view('admin.article.index', compact('articles'));
     }
@@ -38,7 +43,7 @@ class ArticleController extends Controller
             'judul' => $request->judul,
             'isi' => $request->isi,
             'image' => $imagePath,
-            'penulis' => Auth::user()->name,
+            'penulis' => Auth::user()->nama,
         ]);
 
         return redirect()->route('article.index')->with('success', 'Artikel berhasil ditambahkan!');
@@ -126,7 +131,7 @@ public function show($id)
         return redirect()->back()->with('error', 'Artikel tidak ditemukan.');
     }
 
-    return view('detail', compact('article'));
+    return view('admin.article.detail', compact('article'));
 }
 
 

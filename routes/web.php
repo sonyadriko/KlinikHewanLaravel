@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\AccountPatientController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RecordMedicalController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,32 +55,52 @@ Route::post('/register', [RegisterController::class, 'processRegister'])->name('
 //     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 // });
 // Route::middleware(['admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 // });
 
-Route::middleware(['auth', 'role:doctor'])->group(function () {
+Route::middleware(['auth:doctor'])->group(function () {
+
     Route::get('/doctor/dashboard', [DoctorController::class, 'index'])->name('doctor.dashboard');
 });
 
-Route::middleware(['auth', 'role:patient'])->group(function () {
+Route::middleware(['auth:patient'])->group(function () {
     Route::get('/patient/dashboard', [PatientController::class, 'index'])->name('patient.dashboard');
+    Route::get('/patient/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/patient/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/patient/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/patient/hewan/add-hewan', [ProfileController::class, 'createHewan'])->name('hewan.create');
+    Route::post('/patient/hewan/store', [ProfileController::class, 'storeHewan'])->name('hewan.store');
+    Route::get('/patient/hewan/edit/{id}', [ProfileController::class, 'editHewan'])->name('hewan.edit');
+    Route::put('/patient/hewan/update/{id}', [ProfileController::class, 'updateHewan'])->name('hewan.update');
+    Route::delete('/patient/hewan/{id}/delete', [ProfileController::class, 'deleteHewan'])->name('hewan.delete');
+
+    Route::get('/patient/reservation', [ReservationController::class, 'index'])->name('reservation.index');
+    Route::post('/patient/reservation/getAvailableSlots', [ReservationController::class, 'getAvailableSlots'])->name('reservasi.getAvailableSlots');
+    Route::post('/patient/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
+
 });
 
-// Route::middleware(['auth'])->group(function () {
-// Route untuk Artikel
-    Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
-    Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
-    Route::post('/article', [ArticleController::class, 'store'])->name('artikel.store');
-    Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('article.edit');
-    Route::put('/article/{artikel}', [ArticleController::class, 'update'])->name('article.update');
-    Route::delete('/article/delete/{id}', [ArticleController::class, 'destroy'])->name('article.destroy');
-    Route::get('/artikel/{id}', [ArticleController::class, 'show'])->name('artikel.show');
-// });
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/article', [ArticleController::class, 'index'])->name('article.index');
+    Route::get('/admin/article/create', [ArticleController::class, 'create'])->name('article.create');
+    Route::post('/admin/article', [ArticleController::class, 'store'])->name('artikel.store');
+    Route::get('/admin/article/edit/{id}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::put('/admin/article/{artikel}', [ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/admin/article/delete/{id}', [ArticleController::class, 'destroy'])->name('article.destroy');
+    Route::get('/admin/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+
+    Route::get('/admin/account-patient', [AccountPatientController::class, 'index'])->name('account-patient.index');
+    Route::get('/admin/account-patient/create', [AccountPatientController::class, 'create'])->name('account-patient.create');
+    Route::post('/admin/account-patient', [AccountPatientController::class, 'store'])->name('account-patient.store');
+
+});
+
 // Route untuk Akun Pasien
-Route::get('/akun-pasien', [AccountPatientController::class, 'index'])->name('akun-pasien.index');
+// Route::get('/admin/akun-pasien', [AccountPatientController::class, 'index'])->name('akun-pasien.index');
 
 // Route untuk Reservasi
-Route::get('/reservasi', [ReservationController::class, 'index'])->name('reservasi.index');
+// Route::get('/reservasi', [ReservationController::class, 'index'])->name('reservasi.index');
 
 // Route untuk Rekam Medis
 Route::get('/rekam-medis', [RecordMedicalController::class, 'index'])->name('rekam-medis.index');
