@@ -13,13 +13,14 @@
                 </a>
             </li>
 
-            {{-- @if (auth()->user()->role == 'admin') --}}
+            {{-- @if (auth()->check() && auth()->user()->role == 'admin') --}}
             <li>
-                <a href="{{ route('artikel.index') }}" data-toggle="tooltip" data-placement="right" title="Artikel">
+                <a href="{{ route('article.index') }}" data-toggle="tooltip" data-placement="right" title="Artikel">
                     <span><i class="bi bi-globe"></i></span><br>
                     <span>Artikel</span>
                 </a>
             </li>
+
             <li>
                 <a href="{{ route('akun-pasien.index') }}" data-toggle="tooltip" data-placement="right"
                     title="Akun Pasien">
@@ -28,6 +29,8 @@
                 </a>
             </li>
             {{-- @endif --}}
+
+
 
             {{-- @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pasien') --}}
             <li>

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 class LoginController extends Controller
-{
-    public function processLogin(Request $request)
+{public function processLogin(Request $request)
     {
         // Validasi input
         $request->validate([
@@ -21,28 +21,35 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            // Set user ke sesi
-            // dd($user, Auth::user());
-            Auth::login($user);
+            // if (!$user->is_active) {
+            //     return response()->json([
+            //         'success' => false,
+            //         'message' => 'Akun Anda tidak aktif. Hubungi administrator.'
+            //     ]);
+            // }
 
-            // Memeriksa peran pengguna dan mengarahkan ke dashboard yang sesuai
-            if ($user->role === 'admin') {
+            // Set user ke sesi
+            Auth::login($user, $request->has('remember'));
+
+            // Log aktivitas
+            Log::info('User logged in', [
+                'user_id' => $user->id_users,
+                'role' => $user->role,
+                'ip_address' => $request->ip(),
+                'time' => now(),
+            ]);
+
+            // Validasi role dan redirect
+            if (in_array($user->role, ['admin', 'dokter', 'pasien'])) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Login berhasil',
-                    'redirect_url' => route('admin.dashboard') // Arahkan ke dashboard admin
-                ]);
-            } elseif ($user->role === 'dokter') {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Login berhasil',
-                    'redirect_url' => route('dokter.dashboard') // Arahkan ke dashboard dokter
+                    'redirect_url' => route($user->role . '.dashboard')
                 ]);
             } else {
                 return response()->json([
-                    'success' => true,
-                    'message' => 'Login berhasil',
-                    'redirect_url' => route('pasien.dashboard') // Arahkan ke dashboard pasien
+                    'success' => false,
+                    'message' => 'Role tidak valid'
                 ]);
             }
         } else {
@@ -53,6 +60,7 @@ class LoginController extends Controller
             ]);
         }
     }
+
 
     /**
      * Logout pengguna.

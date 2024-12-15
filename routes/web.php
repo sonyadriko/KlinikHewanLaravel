@@ -64,9 +64,16 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/patient/dashboard', [PatientController::class, 'index'])->name('patient.dashboard');
 });
 
+// Route::middleware(['auth'])->group(function () {
 // Route untuk Artikel
-Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
-
+    Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
+    Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
+    Route::post('/article', [ArticleController::class, 'store'])->name('artikel.store');
+    Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::put('/article/{artikel}', [ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/article/delete/{id}', [ArticleController::class, 'destroy'])->name('article.destroy');
+    Route::get('/artikel/{id}', [ArticleController::class, 'show'])->name('artikel.show');
+// });
 // Route untuk Akun Pasien
 Route::get('/akun-pasien', [AccountPatientController::class, 'index'])->name('akun-pasien.index');
 

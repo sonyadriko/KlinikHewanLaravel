@@ -25,8 +25,8 @@
                                         <img class="img-fluid card-img-top" src="{{ $article->image }}" alt="" />
                                         <div class="card-body">
                                             <h4 class="card-title">{{ $article->judul }}</h4>
-                                            <a href="{{ route('artikel.detail', ['id' => $article->id_artikel]) }}">Read
-                                                More</a>
+                                            {{-- <a href="{{ route('artikel.detail', ['id' => $article->id_artikel]) }}">Read
+                                                More</a> --}}
                                         </div>
                                     </div>
                                 </div>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('isi'); // Content field
             $table->string('penulis', 255); // Author field
             $table->timestamps(); // created_at and updated_at
+            $table->softDeletes();
         });
     }
 
