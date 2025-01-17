@@ -51,7 +51,9 @@
         @include('layouts.sidebar2')
 
         <!-- Content -->
-        @yield('content')
+        <div class="content-body">
+            @yield('content')
+        </div>
 
     </div>
 

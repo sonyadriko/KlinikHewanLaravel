@@ -49,6 +49,6 @@ class User extends Authenticatable
     ];
     public function hewan()
     {
-        return $this->hasMany(Hewan::class, 'users_id');
+        return $this->hasMany(Hewan::class, 'user_id');
     }
 }

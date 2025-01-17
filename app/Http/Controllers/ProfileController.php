@@ -82,8 +82,11 @@ public function edit()
             'ras_hewan' => 'nullable|string|max:255',
         ]);
 
+        // $user = auth()->id();
+        // dd($user);
+
         Hewan::create([
-            'users_id' => auth()->id(),
+            'user_id' => auth()->id(),
             'nama_hewan' => $request->nama_hewan,
             'jenis_kelamin' => $request->jenis_kelamin,
             'jenis_hewan' => $request->jenis_hewan,

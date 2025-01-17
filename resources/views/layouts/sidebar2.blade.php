@@ -82,16 +82,16 @@
             </li> --}}
             {{-- @endif --}}
 
-            {{-- @if (auth()->user()->role == 'pasien') --}}
+            @if (auth()->user()->role == 'patient')
             <li>
                 <a href="{{ route('profile.index') }}" data-toggle="tooltip" data-placement="right" title="Profile">
                     <span><i class="bi bi-person-circle"></i></span><br>
                     <span>Profile</span>
                 </a>
             </li>
-            {{-- @endif --}}
+            @endif
 
-            {{-- @if (auth()->user()->role == 'dokter' || auth()->user()->role == 'pasien') --}}
+            @if (auth()->user()->role == 'dokter' || auth()->user()->role == 'patient')
             <li>
                 <a href="{{ route('discussion.index') }}" data-toggle="tooltip" data-placement="right"
                     title="Forum Diskusi">
@@ -99,7 +99,7 @@
                     <span>Forum Diskusi</span>
                 </a>
             </li>
-            {{-- @endif --}}
+            @endif
 
             <li>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

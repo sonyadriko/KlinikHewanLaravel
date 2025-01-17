@@ -1,5 +1,7 @@
 @extends('layouts.master2')
 
+@section('title', 'Profil')
+
 @section('content')
     <div class="container-fluid">
         <div class="row">

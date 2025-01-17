@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('hewan', function (Blueprint $table) {
             $table->id('id_hewan');
-            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
             $table->string('nama_hewan');
             $table->string('jenis_hewan');
             $table->string('jenis_kelamin');
             $table->string('ras_hewan');
             $table->timestamps();
+            
+            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('cascade');
         });
     }
 

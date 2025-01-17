@@ -13,11 +13,11 @@ class Hewan extends Model
     protected $primaryKey = 'id_hewan';
 
     protected $fillable = [
-        'users_id', 'nama_hewan', 'jenis_hewan', 'jenis_kelamin', 'ras_hewan'
+        'user_id', 'nama_hewan', 'jenis_hewan', 'jenis_kelamin', 'ras_hewan'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'users_id');
-    }
+        return $this->belongsTo(User::class, 'user_id', 'id_users');
+    }   
 }
