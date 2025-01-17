@@ -44,7 +44,6 @@ Dashboard Admin Klinik Hewan
 Kami sangat menghargai kontribusi dari berbagai pihak untuk mengembangkan aplikasi ini! Jika Anda ingin membantu, silakan fork repositori ini dan kirimkan pull request. Kami akan dengan senang hati menerima masukan dan perbaikan dari Anda.
 
 Langkah-langkah kontribusi:
-    ```bash    
     
     Fork repositori ini.
     Buat branch baru (git checkout -b feature/fitur-baru).
