@@ -47,11 +47,9 @@
                                             <td>{{ Str::limit($article->isi, 500, '...') }}</td>
                                             <td>{{ $article->penulis }}</td>
                                             <td>
-                                                <div class="action-buttons">
-                                                    <a href="{{ route('article.edit', $article->id_artikel) }}"
-                                                        class="btn btn-primary btn-sm">Ubah</a>
-                                                    <form action="{{ route('article.destroy', $article->id_artikel) }}"
-                                                        method="POST" style="display:inline;">
+                                                <div class="action-buttons" style="display: flex; gap: 8px; align-items: center;">
+                                                    <a href="{{ route('article.edit', $article->id_artikel) }}" class="btn btn-primary btn-sm">Ubah</a>
+                                                    <form action="{{ route('article.destroy', $article->id_artikel) }}" method="POST" style="margin: 0;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"

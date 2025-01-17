@@ -93,7 +93,7 @@
 
             {{-- @if (auth()->user()->role == 'dokter' || auth()->user()->role == 'pasien') --}}
             <li>
-                <a href="{{ route('forum.index') }}" data-toggle="tooltip" data-placement="right"
+                <a href="{{ route('discussion.index') }}" data-toggle="tooltip" data-placement="right"
                     title="Forum Diskusi">
                     <span><i class="bi bi-chat-left-text"></i></span><br>
                     <span>Forum Diskusi</span>
@@ -102,13 +102,11 @@
             {{-- @endif --}}
 
             <li>
-
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     data-toggle="tooltip" data-placement="right" title="Signout">
                     <span><i class="bi bi-box-arrow-right"></i></span><br>
                     <span>Signout</span>
                 </a>
-
                 <!-- Hidden form for logout -->
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf

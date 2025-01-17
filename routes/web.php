@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AccountPatientController;
+use App\Http\Controllers\DiscussionAnswerController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RecordMedicalController;
 use App\Http\Controllers\ForumController;
@@ -25,15 +27,9 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/about', function () {
-    return view('about');
-});
-Route::get('/service', function () {
-    return view('service');
-});
+Route::view('/', 'home');
+Route::view('/about', 'about');
+Route::view('/service', 'service');
 
 Route::get('/login', function () {
     return view('auth/login');
@@ -51,11 +47,6 @@ Route::get('/register', function () {
 })->name('register');
 Route::post('/register', [RegisterController::class, 'processRegister'])->name('register.process');
 
-// Route::middleware(['auth', 'role:admin'])->group(function () {
-//     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-// });
-// Route::middleware(['admin'])->group(function () {
-// });
 
 Route::middleware(['auth:doctor'])->group(function () {
 
@@ -78,6 +69,8 @@ Route::middleware(['auth:patient'])->group(function () {
     Route::post('/patient/reservation/getAvailableSlots', [ReservationController::class, 'getAvailableSlots'])->name('reservasi.getAvailableSlots');
     Route::post('/patient/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
 
+
+
 });
 
 Route::middleware(['auth:admin'])->group(function () {
@@ -94,6 +87,14 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/account-patient/create', [AccountPatientController::class, 'create'])->name('account-patient.create');
     Route::post('/admin/account-patient', [AccountPatientController::class, 'store'])->name('account-patient.store');
 
+
+});
+
+Route::middleware('multi.guard')->group(function () {
+    Route::get('discussions', [DiscussionController::class, 'index'])->name('discussion.index');
+    Route::post('discussions', [DiscussionController::class, 'store'])->name('discussion.store');
+    Route::get('/discussion-answer/{id}', [DiscussionAnswerController::class, 'show'])->name('discussion_answer.show');
+    Route::post('/discussion-answer/{id}', [DiscussionAnswerController::class, 'store'])->name('discussion_answer.store');
 });
 
 // Route untuk Akun Pasien

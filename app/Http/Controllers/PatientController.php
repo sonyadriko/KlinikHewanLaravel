@@ -13,12 +13,13 @@ class PatientController extends Controller
         // Mengambil data artikel dari database yang belum dihapus
         $articles = Article::whereNull('deleted_at')->get();
         Log::info('Session Debug', [
-            'user_id' => auth()->check() ? auth()->id() : null,
-            'auth_user' => auth()->check() ? auth()->user()->id : null,
-            'role' => auth()->check() ? auth()->user()->role : 'Role not available',
-            'guard' => Auth::getDefaultDriver(),
-            'session_id' => session()->getId(),
+            'user_id' => auth()->id(), // Mengambil ID pengguna yang terautentikasi
+            'auth_user' => auth()->user() ? auth()->user()->getAuthIdentifier() : null, // Gunakan metode getAuthIdentifier()
+            'role' => auth()->user() ? auth()->user()->role : 'Role not available',
+            'guard' => Auth::getDefaultDriver(), // Guard yang digunakan
+            'session_id' => session()->getId(), // ID sesi
         ]);
+
 
         return view('patient.index', compact('articles'));
     }
