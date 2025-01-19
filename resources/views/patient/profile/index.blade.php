@@ -87,9 +87,9 @@
                                             <td>{{ $item->ras_hewan }}</td>
                                             <td>
                                                 <div class="action-buttons d-flex">
-                                                    <a href="{{ route('hewan.edit', $item->id_hewan) }}"
+                                                    <a href="{{ route('hewan.edit', $item->id) }}"
                                                         class="btn btn-primary btn-user me-2">Ubah</a>
-                                                    <form action="{{ route('hewan.delete', $item->id_hewan) }}"
+                                                    <form action="{{ route('hewan.delete', $item->id) }}"
                                                         method="POST"
                                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus data hewan ini?')">
                                                         @csrf
@@ -115,22 +115,5 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#areaTable').DataTable({
-                "paging": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "lengthChange": true,
-                "pageLength": 10,
-                "language": {
-                    "paginate": {
-                        "previous": "<i class='bi bi-arrow-left'></i>",
-                        "next": "<i class='bi bi-arrow-right'></i>"
-                    }
-                }
-            });
-        });
-    </script>
+
 @endsection

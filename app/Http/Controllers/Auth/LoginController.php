@@ -10,59 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 class LoginController extends Controller
 {
-    // public function processLogin(Request $request)
-    // {
-    //     // Validasi input
-    //     $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required|string|min:6',
-    //     ]);
-
-    //     // Cek kredensial pengguna
-    //     $user = User::where('email', $request->email)->first();
-
-    //     if ($user && Hash::check($request->password, $user->password)) {
-
-
-    //         // Set user ke sesi
-    //         Auth::login($user, $request->has('remember'));
-
-    //         // Log aktivitas
-    //         Log::info('User logged in', [
-    //             'user_id' => $user->id_users,
-    //             'role' => $user->role,
-    //             'ip_address' => $request->ip(),
-    //             'time' => now(),
-    //         ]);
-
-    //         // Validasi role dan redirect
-    //         if (in_array($user->role, ['admin', 'doctor', 'patient'])) {
-    //             return response()->json([
-    //                 'success' => true,
-    //                 'message' => 'Login berhasil',
-    //                 'redirect_url' => route($user->role . '.dashboard')
-    //             ]);
-    //         } else {
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'Role tidak valid'
-    //             ]);
-    //         }
-    //     } else {
-    //         // Jika kredensial salah
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Email atau password salah'
-    //         ]);
-    //     }
-    // }
-
 
     /**
      * Logout pengguna.
-
-
-
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -98,7 +48,7 @@ class LoginController extends Controller
             if ($guard && Auth::guard($guard)->attempt($validatedData, $request->has('remember'))) {
                 // Log aktivitas pengguna
                 Log::info('User logged in', [
-                    'user_id' => $user->id_users,
+                    'user_id' => $user->id,
                     'role' => $user->role,
                     'ip_address' => $request->ip(),
                     'time' => now(),

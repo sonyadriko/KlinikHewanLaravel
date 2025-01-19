@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class RecordMedicalController extends Controller
 {
-    //
+    public function index(){
+
+    }
 }

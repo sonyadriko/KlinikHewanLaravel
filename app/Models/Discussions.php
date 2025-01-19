@@ -21,7 +21,7 @@ class Discussions extends Model
     // Relasi dengan model User (penulis diskusi)
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id_users');
+        return $this->belongsTo(User::class);
     }
 
     // Relasi dengan model DiscussionAnswer (jawaban dari diskusi)

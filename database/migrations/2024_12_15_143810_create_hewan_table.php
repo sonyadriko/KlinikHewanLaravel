@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hewan', function (Blueprint $table) {
-            $table->id('id_hewan');
+        Schema::create('hewans', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('nama_hewan');
             $table->string('jenis_hewan');
             $table->string('jenis_kelamin');
             $table->string('ras_hewan');
             $table->timestamps();
-            
-            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

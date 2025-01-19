@@ -58,7 +58,7 @@
                 </li>
             @endif
 
-            {{-- @if (auth()->user()->role == 'dokter') --}}
+            @if (auth()->user()->role == 'doctor')
             <li>
                 <a href="{{ route('rekam-medis.index') }}" data-toggle="tooltip" data-placement="right"
                     title="Pemeriksaan">
@@ -66,7 +66,7 @@
                     <span>Pemeriksaan</span>
                 </a>
             </li>
-            {{-- <li>
+            <li>
                 <a href="{{ route('rekam-medis-grooming.index') }}" data-toggle="tooltip" data-placement="right"
                     title="Grooming">
                     <span><i class="bi bi-file-earmark-medical"></i></span><br>
@@ -79,8 +79,8 @@
                     <span><i class="bi bi-file-earmark-medical"></i></span><br>
                     <span>Pet Hotel</span>
                 </a>
-            </li> --}}
-            {{-- @endif --}}
+            </li>
+            @endif
 
             @if (auth()->user()->role == 'patient')
             <li>

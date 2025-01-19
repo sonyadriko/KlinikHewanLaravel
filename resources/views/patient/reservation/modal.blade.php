@@ -9,26 +9,27 @@
                 <form id="reservasiForm" action="{{ route('reservation.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="tanggal_reservasi" class="form-label">Tanggal Reservasi</label>
-                        <input type="date" class="form-control" id="tanggal_reservasi" name="tanggal_reservasi"
+                        <label for="reservation_date" class="form-label">Tanggal Reservasi</label>
+                        <input type="date" class="form-control" id="reservation_date" name="reservation_date"
                             min="{{ now()->toDateString() }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="hewan_id" class="form-label">Pilih Hewan</label>
-                        <select class="form-control" id="hewan_id" name="hewan_id" required>
+                        <select class="form-control" id="pet_id" name="pet_id" required>
                             @foreach ($pets as $pet)
-                                <option value="{{ $pet->id_hewan }}">{{ $pet->nama_hewan }}</option>
+                                <option value="{{ $pet->id }}">{{ $pet->nama_hewan }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="service_type" class="form-label">Jenis Layanan</label>
                         <input type="text" class="form-control" id="service_type" name="service_type"
-                            value="pemeriksaan" readonly>
+                            value="Pemeriksaan" placeholder="Pemeriksaan" readonly>
                     </div>
+
                     <div class="mb-3">
-                        <label for="slot_reservasi" class="form-label">Pilih Slot</label>
-                        <select class="form-control" id="slot_reservasi" name="slot_reservasi" required></select>
+                        <label for="reservation_slot" class="form-label">Pilih Slot</label>
+                        <select class="form-control" id="reservation_slot" name="reservation_slot" required></select>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>

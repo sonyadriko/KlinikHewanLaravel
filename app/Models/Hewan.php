@@ -9,15 +9,12 @@ class Hewan extends Model
 {
     use HasFactory;
 
-    protected $table = 'hewan';
-    protected $primaryKey = 'id_hewan';
-
     protected $fillable = [
         'user_id', 'nama_hewan', 'jenis_hewan', 'jenis_kelamin', 'ras_hewan'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id_users');
-    }   
+        return $this->belongsTo(User::class);
+    }
 }

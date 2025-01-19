@@ -10,38 +10,37 @@ use App\Models\User;
 class ProfileController extends Controller
 {
     public function __construct()
-{
-    $this->middleware('auth');
-}
-
-    // Controller Method for Index
-public function index()
-{
-    // Get the logged-in user
-    $user = Auth::user();
-
-    // Fetch the user's animals
-    $animals = $user->hewan; // Assuming there's a relationship defined in the User model like:
-                              // public function hewan() { return $this->hasMany(Hewan::class, 'users_id'); }
-
-    // Return the profile view with user and animal data
-    return view('patient.profile.index', compact('user', 'animals'));
-}
-
-// Controller Method for Edit
-public function edit()
-{
-    // Get the logged-in user
-    $user = Auth::user();
-
-    // If user is not authenticated, redirect to login with error message
-    if (!$user) {
-        return redirect()->route('login')->with('error', 'Data pengguna tidak ditemukan.');
+    {
+        $this->middleware('auth');
     }
 
-    // Return the edit view with the user data
-    return view('patient.profile.edit', compact('user'));
-}
+    // Controller Method for Index
+    public function index()
+    {
+        // Get the logged-in user
+        $user = Auth::user();
+
+        // Fetch the user's animals
+        $animals = $user->hewan;
+
+
+        // Return the profile view with user and animal data
+        return view('patient.profile.index', compact('user', 'animals'));
+    }
+
+    public function edit()
+    {
+        // Get the logged-in user
+        $user = Auth::user();
+
+        // If user is not authenticated, redirect to login with error message
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Data pengguna tidak ditemukan.');
+        }
+
+        // Return the edit view with the user data
+        return view('patient.profile.edit', compact('user'));
+    }
 
     public function update(Request $request)
     {
@@ -116,7 +115,7 @@ public function edit()
     private function getHewanByUser($id)
     {
         return Hewan::where('id_hewan', $id)
-                    ->where('users_id', auth()->id())
+                    ->where('user_id', auth()->id())
                     ->firstOrFail();
     }
 

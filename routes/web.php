@@ -69,8 +69,6 @@ Route::middleware(['auth:patient'])->group(function () {
     Route::post('/patient/reservation/getAvailableSlots', [ReservationController::class, 'getAvailableSlots'])->name('reservasi.getAvailableSlots');
     Route::post('/patient/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
 
-
-
 });
 
 Route::middleware(['auth:admin'])->group(function () {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps(); // created_at, updated_at
 
             // Foreign key constraint (assuming 'users' table exists)
-            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         // Create 'discussion_answers' table
@@ -31,7 +31,7 @@ return new class extends Migration
 
             // Foreign key constraint (assuming 'discussions' and 'users' tables exist)
             $table->foreign('discussion_id')->references('id')->on('discussions')->onDelete('cascade');
-            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

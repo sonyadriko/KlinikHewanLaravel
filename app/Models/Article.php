@@ -11,11 +11,6 @@ class Article extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'artikel';
-
-    protected $primaryKey = 'id_artikel';
-
-
     // Tentukan kolom yang dapat diisi (fillable)
     protected $fillable = [
         'image',

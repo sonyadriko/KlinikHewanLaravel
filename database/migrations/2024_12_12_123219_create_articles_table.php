@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->string('image', 255)->nullable(); // Nullable image field
+            $table->string('judul', 255); // Title field
+            $table->text('isi'); // Content field
+            $table->string('penulis', 255); // Author field
+            $table->timestamps(); // created_at and updated_at
+            $table->softDeletes();
         });
     }
 
